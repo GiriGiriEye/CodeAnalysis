@@ -1,0 +1,6 @@
+projectKey=CodeAnalysis
+serverUrl=http://localhost:9000
+serverVersion=7.7.0.23042
+dashboardUrl=http://localhost:9000/dashboard?id=CodeAnalysis
+ceTaskId=AWpOWK5OabiqnQzZEs34
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWpOWK5OabiqnQzZEs34
