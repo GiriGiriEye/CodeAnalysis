@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nju.edu.CodeAnalysis.dao.*;
+import com.nju.edu.CodeAnalysis.dao.impl.*;
 
 /**
  * Servlet implementation class MajorServlet
@@ -31,7 +33,9 @@ public class MajorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		AnalysisDao ad = new AnalysisDaoImpl();
+		System.out.println(ad.getAllAnalysisByCourseNumberPath("operating system", 1).toString());
+		response.getWriter().append(ad.getAllAnalysisByCourseNumberPath("operating system", 1).toString()).append(request.getContextPath());
 	}
 
 	/**

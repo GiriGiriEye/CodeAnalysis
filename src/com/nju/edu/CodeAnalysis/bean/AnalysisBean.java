@@ -67,7 +67,7 @@ public class AnalysisBean implements Serializable {
 		return vulnerabilities;
 	}
 
-	public void setVulnerability(String vulnerabilities) {
+	public void setVulnerabilities(String vulnerabilities) {
 		this.vulnerabilities = vulnerabilities;
 	}
 
