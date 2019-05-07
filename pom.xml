@@ -51,6 +51,7 @@
           <port>8080</port>    <!-- 启动端口 Default:8080 -->
           <path>/CodeAnalysis</path>    <!-- 访问应用路径  Default: /${project.artifactId}-->
           <uriEncoding>UTF-8</uriEncoding>      <!-- uri编码 Default: ISO-8859-1 -->
+
         </configuration>
       </plugin>
       <plugin>
@@ -58,12 +59,25 @@
         <version>3.0.0</version>
         <configuration>
           <warSourceDirectory>WebContent</warSourceDirectory>
+            <webResources>
+                <resource>
+                    <!-- this is relative to the pom.xml directory -->
+                    <directory>WebContent</directory>
+                </resource>
+            </webResources>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
         <configuration>
+            <warSourceDirectory>WebContent</warSourceDirectory>
+            <webResources>
+                <resource>
+                    <!-- this is relative to the pom.xml directory -->
+                    <directory>WebContent</directory>
+                </resource>
+            </webResources>
         </configuration>
       </plugin>
     </plugins>
