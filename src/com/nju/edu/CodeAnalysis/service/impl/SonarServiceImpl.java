@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class SonarServiceImpl implements SonarService {
 	
-	private static String forwardAddress = "http://localhost:9000/api/measures/component?componentKey=";
+	private static String forwardAddress = "http://140.143.157.215:9000/api/measures/component?componentKey=";
 	private static String backAddress = "&metricKeys=bugs,vulnerabilities,code_smells,duplicated_lines_density,ncloc_language_distribution,coverage";
 	
 	private AnalysisDao ad;
