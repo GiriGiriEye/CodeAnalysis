@@ -17,30 +17,10 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.nju.edu.CodeAnalysis.servlet.LoginServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>StartServlet</servlet-name>
-    <url-pattern>/servlet/StartServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/CodeAnalysis/login</url-pattern>
-  </servlet-mapping>
-  <!--  
-  <filter>
-    <filter-name>AuthenticationFilter</filter-name>
-    <filter-class>com.nju.edu.CodeAnalysis.filter.AuthenticationFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthenticationFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>EncodingFilter</filter-name>
-    <filter-class>com.nju.edu.CodeAnalysis.filter.EncodingFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>EncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  -->
+  <servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.nju.edu.CodeAnalysis.servlet.TestServlet1</servlet-class>
+  </servlet>
+  
+  
 </web-app>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+  <div id="test"></div>
+  <span id="test2"></span>
+</body>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+	  $.ajax({
+		  type: "GET",
+		  url:"http://localhost:8080/CodeAnalysis/show",
+		  dataType:"json",
+		  success:function(result){
+			  test(result);
+			  }
+		  });
+  });
+  function test(result){
+	  var list = eval(result);
+	  alert(list[1].codeSmells);
+	  for(var i = 0; i < list.size; i++){
+	  	  $("#test").append("<p>"+list[i]+"</p");
+	  }
+  }
+</script>
+</html>

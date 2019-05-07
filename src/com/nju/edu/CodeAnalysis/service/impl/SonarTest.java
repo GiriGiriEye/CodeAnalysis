@@ -7,7 +7,7 @@ import net.sf.json.JSONObject;
 
 public class SonarTest {
 
-	static String address = "http://localhost:9000/api/measures/component?componentKey=CodeAnalysis&metricKeys=code_smells";
+	static String address = "http://localhost:9000/api/measures/component?componentKey=CodeAnalysis&metricKeys=bugs,vulnerabilities,code_smells,duplicated_lines_density,ncloc_language_distribution,coverage";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
