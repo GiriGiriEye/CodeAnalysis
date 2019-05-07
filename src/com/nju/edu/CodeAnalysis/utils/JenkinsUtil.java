@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class JenkinsUtil {
 	
-	private static String url = "http://localhost:8000/";
+	private static String url = "http://140.143.157.215:8000/";
 	
 	public void build(String jobName) {
 		
