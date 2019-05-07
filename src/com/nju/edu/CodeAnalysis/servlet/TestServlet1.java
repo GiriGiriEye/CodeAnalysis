@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import com.nju.edu.CodeAnalysis.bean.*;
 import com.nju.edu.CodeAnalysis.utils.*;
+import com.nju.edu.CodeAnalysis.service.*;
+import com.nju.edu.CodeAnalysis.service.impl.*;
 import java.io.*;
 /**
  * Servlet implementation class TestServlet1
@@ -17,7 +19,8 @@ import java.io.*;
 @WebServlet("/show")
 public class TestServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private SonarService ss = new SonarServiceImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,11 +35,11 @@ public class TestServlet1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("111");
-		AnalysisBean ab = new AnalysisBean("1","2","3","4","5","6","7","8");
-		AnalysisBean ab1 = new AnalysisBean("1a","2a","3a","4a","5a","6a","7a","8a");
-		List ll = new ArrayList();
-		ll.add(ab);
-		ll.add(ab1);
+		LinkedList<AnalysisBean> ll = ss.getAllAnalysisOfOneAssignment("operating_system", 1);
+		ll.get(0).setStudentID("151250001");
+		ll.get(0).setName("李雷");
+		ll.get(1).setStudentID("151250002");
+		ll.get(1).setName("韩梅梅");
 		String json = JSONUtil.JavaToJson(ll);
 		response.setContentType("application/json;charset=utf-8");
 		response.setCharacterEncoding("UTF-8");

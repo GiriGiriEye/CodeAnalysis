@@ -13,13 +13,14 @@ public class AnalysisBean implements Serializable {
 	private String codeSmells = null;
 	private String coverage = null;
 	private String duplicated_lines_density = null;
+	private String sonarPath = null;
 	
 	public AnalysisBean() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public AnalysisBean(String studentID, String name, String score, String bugs, String vulnerabilities,
-			String codeSmells, String coverage, String duplicated_lines_density) {
+			String codeSmells, String coverage, String duplicated_lines_density,String sonarPath) {
 		super();
 		this.studentID = studentID;
 		this.name = name;
@@ -29,6 +30,7 @@ public class AnalysisBean implements Serializable {
 		this.codeSmells = codeSmells;
 		this.coverage = coverage;
 		this.duplicated_lines_density = duplicated_lines_density;
+		this.sonarPath = sonarPath;
 	}
 
 	public String getStudentID() {
@@ -93,6 +95,14 @@ public class AnalysisBean implements Serializable {
 
 	public void setDuplicated_lines_density(String duplicated_lines_density) {
 		this.duplicated_lines_density = duplicated_lines_density;
+	}
+	
+	public String getSonarPath() {
+		return sonarPath;
+	}
+
+	public void setSonarPath(String sonarPath) {
+		this.sonarPath = sonarPath;
 	}
 	
 	

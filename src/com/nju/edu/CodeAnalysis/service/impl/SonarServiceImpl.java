@@ -62,12 +62,14 @@ public class SonarServiceImpl implements SonarService {
 		ad = new AnalysisDaoImpl();
 		LinkedList<String> projectPathList = ad.getAllAnalysisByCourseNumberPath(courseName, number);
 		projectPathList = PathNameUtil.convertPathName(projectPathList);
+		System.out.println(projectPathList.toString());
 		LinkedList<AnalysisBean> list = new LinkedList<AnalysisBean>();
 		JsonParser parser = new JsonParser();
 		try {
 			for(int i = 0; i < projectPathList.size(); i++) {
 				AnalysisBean ab = new AnalysisBean();
 				String address = forwardAddress + projectPathList.get(i) + backAddress;
+				System.out.println("address: "+address);
 				URL url = new URL(address);
 				URLConnection conn = url.openConnection(); 
 				StringBuffer document = new StringBuffer();  
@@ -100,9 +102,12 @@ public class SonarServiceImpl implements SonarService {
 					}
 					}
 				}
-//				System.out.println(array.toString());
+				ab.setSonarPath("http://localhost:9000/dashboard?id="+projectPathList.get(i));
+				System.out.println(ab.getBugs());
 				list.add(ab);
+//				System.out.println("list"+list.toString());
 			}
+
 			return list;
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
