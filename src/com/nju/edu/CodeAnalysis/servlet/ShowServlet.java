@@ -16,15 +16,15 @@ import java.io.*;
 /**
  * Servlet implementation class TestServlet1
  */
-@WebServlet("/show")
-public class TestServlet1 extends HttpServlet {
+@WebServlet("/Show")
+public class ShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	private SonarService ss = new SonarServiceImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestServlet1() {
+    public ShowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +34,7 @@ public class TestServlet1 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("111");
 		LinkedList<AnalysisBean> ll = ss.getAllAnalysisOfOneAssignment("operating_system", 1);
-		ll.get(0).setStudentID("151250001");
-		ll.get(0).setName("李雷");
-		ll.get(1).setStudentID("151250002");
-		ll.get(1).setName("韩梅梅");
 		String json = JSONUtil.JavaToJson(ll);
 		response.setContentType("application/json;charset=utf-8");
 		response.setCharacterEncoding("UTF-8");

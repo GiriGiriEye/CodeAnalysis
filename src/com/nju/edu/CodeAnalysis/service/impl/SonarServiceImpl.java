@@ -6,6 +6,7 @@ import com.nju.edu.CodeAnalysis.service.JenkinsService;
 import com.nju.edu.CodeAnalysis.dao.AnalysisDao;
 import com.nju.edu.CodeAnalysis.dao.impl.AnalysisDaoImpl;
 import com.nju.edu.CodeAnalysis.utils.PathNameUtil;
+import com.nju.edu.CodeAnalysis.model.ProjectPath;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 
 public class SonarServiceImpl implements SonarService {
 	
-	private static String forwardAddress = "http://140.143.157.215:9000/api/measures/component?componentKey=";
+	private static String forwardAddress = "http://localhost:9000/api/measures/component?componentKey=";
 	private static String backAddress = "&metricKeys=bugs,vulnerabilities,code_smells,duplicated_lines_density,ncloc_language_distribution,coverage";
 	
 	private AnalysisDao ad;
@@ -55,20 +56,78 @@ public class SonarServiceImpl implements SonarService {
 		js.multipleBuild(projectPathList);
 	}
 	
+	@Override
+	public void scan(String projectPath) {
+		
+		JenkinsService js = new JenkinsServiceImpl();
+		js.singleBuild(projectPath);
+	}
+	
+	public AnalysisBean getAnalysisOfStudent(String projectPath) {
+		AnalysisBean ab = new AnalysisBean();
+		JsonParser parser = new JsonParser();
+		try {
+			String address = forwardAddress + "student" + backAddress;
+			URL url = new URL(address);
+			URLConnection conn = url.openConnection();
+			StringBuffer document = new StringBuffer();  
+			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
+			String line = null;
+			while ((line = reader.readLine()) != null){
+				document.append(line);
+			}
+			reader.close();
+			JsonObject object =(JsonObject)parser.parse(document.toString()); 
+			JsonObject object1 = object.get("component").getAsJsonObject();
+			JsonArray array = object1.get("measures").getAsJsonArray();
+			for(int j = 0; j < array.size();j++) {
+				JsonObject object2 = array.get(j).getAsJsonObject();
+				switch(object2.get("metric").getAsString()) {
+				case "vulnerabilities":{
+					ab.setVulnerabilities(object2.get("value").getAsString());
+				}
+				case "bugs":{
+					ab.setBugs(object2.get("value").getAsString());
+				}
+				case "code_smells":{
+					ab.setCodeSmells(object2.get("value").getAsString());
+				}
+				case "coverage":{
+					ab.setCoverage(object2.get("value").getAsString());
+				}
+				case "duplicated_lines_density":{
+					ab.setDuplicated_lines_density(object2.get("value").getAsString());
+				}
+				}
+			}
+			ab.setSonarPath("http://localhost:9000/dashboard?id=student");
+			return ab;
+		}catch(IOException ioe) {
+			ioe.printStackTrace();
+		}
+		return ab;
+	}
+	
 	/**
 	 * AnalysisBean假数据，标记,应该在Dao层里搞一个完整的
 	 */
 	public LinkedList<AnalysisBean> getAllAnalysisOfOneAssignment(String courseName, int number){
 		ad = new AnalysisDaoImpl();
-		LinkedList<String> projectPathList = ad.getAllAnalysisByCourseNumberPath(courseName, number);
-		projectPathList = PathNameUtil.convertPathName(projectPathList);
-		System.out.println(projectPathList.toString());
+		LinkedList<ProjectPath> projectPathList = ad.getAllAnalysisByCourseNumberPath(courseName, number);
+		LinkedList<String> stringList = new LinkedList<String>();
+		for(int i = 0; i < projectPathList.size(); i++) {
+			stringList.add(projectPathList.get(i).getProjectPath());
+		}
+		stringList = PathNameUtil.convertPathName(stringList);
+
 		LinkedList<AnalysisBean> list = new LinkedList<AnalysisBean>();
 		JsonParser parser = new JsonParser();
 		try {
 			for(int i = 0; i < projectPathList.size(); i++) {
 				AnalysisBean ab = new AnalysisBean();
-				String address = forwardAddress + projectPathList.get(i) + backAddress;
+				ab.setStudentID(projectPathList.get(i).getStudentID());
+				ab.setName(projectPathList.get(i).getName());
+				String address = forwardAddress + stringList.get(i) + backAddress;
 				System.out.println("address: "+address);
 				URL url = new URL(address);
 				URLConnection conn = url.openConnection(); 
@@ -103,7 +162,6 @@ public class SonarServiceImpl implements SonarService {
 					}
 				}
 				ab.setSonarPath("http://localhost:9000/dashboard?id="+projectPathList.get(i));
-				System.out.println(ab.getBugs());
 				list.add(ab);
 //				System.out.println("list"+list.toString());
 			}
