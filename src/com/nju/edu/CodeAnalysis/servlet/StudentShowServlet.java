@@ -37,6 +37,7 @@ public class StudentShowServlet extends HttpServlet {
 		ss = new SonarServiceImpl();
 		String projectPath = "c:/Sonar/student";
 		String json = JSONUtil.JavaToJson(ss.getAnalysisOfStudent(projectPath));
+		System.out.println(json);
 		response.setContentType("application/json;charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();

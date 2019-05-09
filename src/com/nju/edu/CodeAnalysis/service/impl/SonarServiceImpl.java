@@ -77,30 +77,32 @@ public class SonarServiceImpl implements SonarService {
 				document.append(line);
 			}
 			reader.close();
-			JsonObject object =(JsonObject)parser.parse(document.toString()); 
+			JsonObject object =(JsonObject)parser.parse(document.toString());
+			
 			JsonObject object1 = object.get("component").getAsJsonObject();
 			JsonArray array = object1.get("measures").getAsJsonArray();
 			for(int j = 0; j < array.size();j++) {
 				JsonObject object2 = array.get(j).getAsJsonObject();
 				switch(object2.get("metric").getAsString()) {
 				case "vulnerabilities":{
-					ab.setVulnerabilities(object2.get("value").getAsString());
+					ab.setVulnerabilities(object2.get("value").getAsString());break;
 				}
 				case "bugs":{
-					ab.setBugs(object2.get("value").getAsString());
+					ab.setBugs(object2.get("value").getAsString());break;
 				}
 				case "code_smells":{
-					ab.setCodeSmells(object2.get("value").getAsString());
+					ab.setCodeSmells(object2.get("value").getAsString());break;
 				}
 				case "coverage":{
-					ab.setCoverage(object2.get("value").getAsString());
+					ab.setCoverage(object2.get("value").getAsString());break;
 				}
 				case "duplicated_lines_density":{
-					ab.setDuplicated_lines_density(object2.get("value").getAsString());
+					ab.setDuplicated_lines_density(object2.get("value").getAsString());break;
 				}
+				default: break;
 				}
 			}
-			ab.setSonarPath("http://localhost:9000/dashboard?id=student");
+			ab.setSonarPath("http://140.143.157.215:9000/dashboard?id=student");
 			return ab;
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
@@ -128,7 +130,6 @@ public class SonarServiceImpl implements SonarService {
 				ab.setStudentID(projectPathList.get(i).getStudentID());
 				ab.setName(projectPathList.get(i).getName());
 				String address = forwardAddress + stringList.get(i) + backAddress;
-				System.out.println("address: "+address);
 				URL url = new URL(address);
 				URLConnection conn = url.openConnection(); 
 				StringBuffer document = new StringBuffer();  
@@ -145,23 +146,24 @@ public class SonarServiceImpl implements SonarService {
 					JsonObject object2 = array.get(j).getAsJsonObject();
 					switch(object2.get("metric").getAsString()) {
 					case "vulnerabilities":{
-						ab.setVulnerabilities(object2.get("value").getAsString());
+						ab.setVulnerabilities(object2.get("value").getAsString());break;
 					}
 					case "bugs":{
-						ab.setBugs(object2.get("value").getAsString());
+						ab.setBugs(object2.get("value").getAsString());break;
 					}
 					case "code_smells":{
-						ab.setCodeSmells(object2.get("value").getAsString());
+						ab.setCodeSmells(object2.get("value").getAsString());break;
 					}
 					case "coverage":{
-						ab.setCoverage(object2.get("value").getAsString());
+						ab.setCoverage(object2.get("value").getAsString());break;
 					}
 					case "duplicated_lines_density":{
-						ab.setDuplicated_lines_density(object2.get("value").getAsString());
+						ab.setDuplicated_lines_density(object2.get("value").getAsString());break;
 					}
+					default:break;
 					}
 				}
-				ab.setSonarPath("http://localhost:9000/dashboard?id="+projectPathList.get(i));
+				ab.setSonarPath("http://140.143.157.215:9000/dashboard?id="+stringList.get(i));
 				list.add(ab);
 //				System.out.println("list"+list.toString());
 			}

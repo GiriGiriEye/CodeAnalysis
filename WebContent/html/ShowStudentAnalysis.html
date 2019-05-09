@@ -63,11 +63,11 @@
 		  async:true,
 		  cache:false,
 		  success:function(res){
-			  if(res.sonarPath != null){
+			  if(res != null){
 				  show(res);
 			  }
 			  else{
-				  setTimeout(ask(),5000);
+				  setTimeout(ask(),10000);
 			  }
 			  }
       });
@@ -75,7 +75,7 @@
   function show(res){
       var result = eval(res);
       $("#showBody").append("<tr>");
-  	  $("#showBody").append("<td>"+result.score+"</td>");
+  	  $("#showBody").append("<td>"+13+"</td>");
   	  $("#showBody").append("<td>"+result.bugs+"</td>");
   	  $("#showBody").append("<td>"+result.vulnerabilities+"</td>");
   	  $("#showBody").append("<td>"+result.codeSmells+"</td>");

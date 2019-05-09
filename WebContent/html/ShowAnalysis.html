@@ -30,9 +30,7 @@
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 </header>
-
-<div class="am-cf admin-main">
-  <div id="loading-anime">
+<div id="loading-anime">
     <div class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
@@ -40,11 +38,14 @@
     </div>
     <h1 style="text-align:center;">代码分析中，请稍候……</h1>
   </div>
+<div class="am-cf admin-main">
+  
   <!-- sidebar start -->
   
   <!-- sidebar end -->
 
   <!-- content start -->
+  <div id="show" style="display:none">
   <div class="admin-content" style="padding-left: 3%;">
     <div>
       <div class="am-cf am-padding am-padding-bottom-0">
@@ -95,7 +96,7 @@
 
       </div>
     </div>
-
+  </div>
     <footer class="admin-content-footer">
       <hr>
       <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
@@ -103,7 +104,8 @@
 
   </div>
   <!-- content end -->
-</div>
+  
+
 
 <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
@@ -135,19 +137,20 @@
 		  cache:false,
 		  dataType:"json",
 		  success:function(res){
-			  if(res.sonarPath != null){
-				  show(res);
+			  if(res != null){
+				  showResult(res);
 			  }
 			  else{
-				  setTimeout(ask(),5000);
+				  setTimeout(ask(),10000);
 			  }
 			  }
 		  });
   }
   
 
-function show(res){
-	  var list = eval(result);
+function showResult(res){
+	  var list = eval(res);
+	  
 	  for(var i = 0; i < list.length; i++){
 		  $("#showBody").append("<tr>");
 	  	  $("#showBody").append("<td>"+list[i].studentID+"</td>");
@@ -161,6 +164,10 @@ function show(res){
 	  	  $("#showBody").append("<td><a href=\""+list[i].sonarPath+"\">"+list[i].sonarPath+"</a></td>");
 	  	  $("#showBody").append("</tr>");
 	  }
+	  $("#show").show();
+	  
+	  $("#loading-anime").hide();
+	  
 }
 </script>
 </body>
