@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../AmazeUI/assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="../AmazeUI/assets/css/admin.css">
+<link rel="stylesheet" href="../css/loading-anime.css">
+<title>Insert title here</title>
+</head>
+<body>
+<header class="am-topbar am-topbar-inverse admin-header">
+  <div class="am-topbar-brand">
+    <strong>Code Analysis System</strong> <small>代码静态检查系统</small>
+  </div>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+</header>
+
+<div class="am-cf admin-main">
+  <div id="loading-anime">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+    <h1 style="text-align:center;">代码分析中，请稍候……</h1>
+  </div>
+  
+  <div class="admin-content" id="analysis-show" style="display:none;padding-left:5%;">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+          <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+              <thead>
+              <tr>
+                <th class="table-type">得分</th><th class="table-type">bug数</th><th class="table-type">漏洞</th><th class="table-type">异味</th><th class="table-type">覆盖率</th><th class="table-type">重复率</th><th>详细信息地址</th>
+              </tr>
+              </thead>
+              <tbody id="showBody">
+			     
+              </tbody>
+            </table>
+            <hr />
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+	  ask();
+  });
+
+  function ask() {
+	  $.ajax({
+		  type: "GET",
+		  url:"../StudentShow",
+		  dataType:"json",
+		  async:true,
+		  cache:false,
+		  success:function(res){
+			  if(res != null){
+				  show(res);
+			  }
+			  else{
+				  setTimeout(ask(),10000);
+			  }
+			  }
+      });
+  }
+  function show(res){
+      var result = eval(res);
+      $("#showBody").append("<tr>");
+  	  $("#showBody").append("<td>"+13+"</td>");
+  	  $("#showBody").append("<td>"+result.bugs+"</td>");
+  	  $("#showBody").append("<td>"+result.vulnerabilities+"</td>");
+  	  $("#showBody").append("<td>"+result.codeSmells+"</td>");
+  	  $("#showBody").append("<td>"+result.coverage+"</td>");
+  	  $("#showBody").append("<td>"+result.duplicated_lines_density+"</td>");
+  	  $("#showBody").append("<td><a href=\""+result.sonarPath+"\">"+result.sonarPath+"</a></td>");
+  	  $("#showBody").append("</tr>");
+  	  $("#analysis-show").show();
+  	  $("#loading-anime").hide();
+  }
+</script>
+</html>

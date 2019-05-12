@@ -2,6 +2,7 @@ package com.nju.edu.CodeAnalysis.model;
 
 public class ProjectPath {
 	private String studentID;
+	private String name;
 	private String courseName;
 	private int number;
 	private String projectPath;
@@ -10,9 +11,10 @@ public class ProjectPath {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProjectPath(String studentID, String courseName, int number, String projectPath) {
+	public ProjectPath(String studentID, String name, String courseName, int number, String projectPath) {
 		super();
 		this.studentID = studentID;
+		this.name = name;
 		this.courseName = courseName;
 		this.number = number;
 		this.projectPath = projectPath;
@@ -24,6 +26,14 @@ public class ProjectPath {
 
 	public void setStudentID(String studentID) {
 		this.studentID = studentID;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCourseName() {

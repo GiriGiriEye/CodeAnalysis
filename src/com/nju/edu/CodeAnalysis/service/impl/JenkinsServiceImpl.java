@@ -22,11 +22,11 @@ public class JenkinsServiceImpl implements JenkinsService {
 	@Override
 	public void singleBuild(String projectPath) {
 		// TODO Auto-generated method stub
-		String jobName = JenkinsUtil.getFreeJob();
-		
-		if(jobName.equals("") || jobName == null) {
-			
-		}
+		String jobName = "studentbuild";
+		LinkedList<String> list = new LinkedList<String>();
+		list.add(projectPath);
+		JenkinsThread jthread = new JenkinsThread(jobName, list);
+		jthread.run();
 	}
 
 	@Override
