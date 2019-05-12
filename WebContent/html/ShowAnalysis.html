@@ -1,117 +1,136 @@
-
 <!DOCTYPE html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>分析结果展示</title>
-  <meta name="description" content="这是一个 table 页面">
-  <meta name="keywords" content="table">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-  <link rel="stylesheet" href="../AmazeUI/assets/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="../AmazeUI/assets/css/admin.css">
-  <link rel="stylesheet" href="../css/loading-anime.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>分析结果展示</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="../AmazeUI/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="../AmazeUI/assets/css/admin.css">
+    <link rel="stylesheet" href="../css/loading-anime.css">
+    <script lang="javascript" src="../js/jte.js"></script>
 </head>
 <body>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
-  以获得更好的体验！</p>
+    以获得更好的体验！</p>
 <![endif]-->
 
 <header class="am-topbar am-topbar-inverse admin-header">
-  <div class="am-topbar-brand">
-    <strong>Code Analysis System</strong> <small>代码静态检查系统</small>
-  </div>
+    <div class="am-topbar-brand">
+        <strong>Code Analysis System</strong>
+        <small>代码静态检查系统</small>
+    </div>
 
-  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+            data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span></button>
 </header>
 <div id="loading-anime">
     <div class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
     </div>
     <h1 style="text-align:center;">代码分析中，请稍候……</h1>
-  </div>
+</div>
 <div class="am-cf admin-main">
-  
-  <!-- sidebar start -->
-  
-  <!-- sidebar end -->
 
-  <!-- content start -->
-  <div id="show" style="display:none">
-  <div class="admin-content" style="padding-left: 3%;">
-    <div>
-      <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> / <small>Table</small></div>
-      </div>
+    <!-- sidebar start -->
 
-      <hr>
-	  
-        <div class="am-u-sm-12 am-u-md-3" style="position: absolute; right: 3%;">
-          <div class="am-input-group am-input-group-sm">
-            <input type="text" class="am-form-field">
-          <span class="am-input-group-btn">
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div id="show" style="display:none">
+        <div class="admin-content" style="padding-left: 3%;">
+            <div>
+                <div class="am-cf am-padding am-padding-bottom-0">
+                    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
+                        <small>Table</small>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="am-u-sm-12 am-u-md-3" style="position: absolute; right: 3%;">
+
+                    <div class="am-input-group am-input-group-sm">
+
+                        <input type="text" class="am-form-field">
+                        <span class="am-input-group-btn">
+
             <button class="am-btn am-btn-default" type="button">搜索</button>
-          </span>
-          </div>
-        </div>
-      </div>
-	  <br>
-      <div class="am-g">
-        <div class="am-u-sm-12">
-          <form class="am-form">
-            <table class="am-table am-table-striped am-table-hover table-main">
-              <thead>
-              <tr>
-                <th class="table-id">学号</th><th class="table-type">姓名</th><th class="table-type">得分</th><th class="table-type">bug数</th><th class="table-type">漏洞</th><th class="table-type">异味</th><th class="table-type">覆盖率</th><th class="table-type">重复率</th><th>详细信息地址</th>
-              </tr>
-              </thead>
-              <tbody id="showBody">
-			   
-              </tbody>
-            </table>
-            <div class="am-cf">
-              <div class="am-fr">
-                <ul class="am-pagination">
-                  <li class="am-disabled"><a href="#">«</a></li>
-                  <li class="am-active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">»</a></li>
-                </ul>
-              </div>
-            </div>
-            <hr />
-          </form>
-        </div>
+                                <button class="am-btn am-btn-default" type="button" onclick="downloadXlsx()">下载为excel文档</button>
 
-      </div>
+          </span>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-id">学号</th>
+                                <th class="table-type">姓名</th>
+                                <th class="table-type">得分</th>
+                                <th class="table-type">bug数</th>
+                                <th class="table-type">漏洞</th>
+                                <th class="table-type">异味</th>
+                                <th class="table-type">覆盖率</th>
+                                <th class="table-type">重复率</th>
+                                <th>详细信息地址</th>
+                            </tr>
+                            </thead>
+                            <tbody id="showBody">
+
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+                            <div class="am-fr">
+                                <ul class="am-pagination">
+                                    <li class="am-disabled"><a href="#">«</a></li>
+                                    <li class="am-active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
     <footer class="admin-content-footer">
-      <hr>
-      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        <hr>
+        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
     </footer>
 
-  </div>
-  <!-- content end -->
-  
+</div>
+<!-- content end -->
 
 
-<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
 <footer>
-  <hr>
-  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    <hr>
+    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
 </footer>
 
 <!--[if lt IE 9]>
@@ -126,51 +145,85 @@
 
 <script>
 
-  $(document).ready(function(){
-	  ask();
-  });
-  function ask(){
-	  $.ajax({
-		  type: "GET",
+    $(document).ready(function () {
+        ask();
+    });
+    var jsondata;
 
-		  url:"../Show",
-		  async:true,
-		  cache:false,
+    function ask() {
+        $.ajax({
+            type: "GET",
 
-		  dataType:"json",
-		  success:function(res){
-			  if(res != null){
-				  showResult(res);
-			  }
-			  else{
-				  setTimeout(ask(),10000);
-			  }
-			  }
-		  });
-  }
-  
+            url: "../Show",
+            async: true,
+            cache: false,
 
-function showResult(res){
-	  var list = eval(res);
-	  
-	  for(var i = 0; i < list.length; i++){
-		  $("#showBody").append("<tr>");
-	  	  $("#showBody").append("<td>"+list[i].studentID+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].name+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].score+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].bugs+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].vulnerabilities+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].codeSmells+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].coverage+"</td>");
-	  	  $("#showBody").append("<td>"+list[i].duplicated_lines_density+"</td>");
-	  	  $("#showBody").append("<td><a href=\""+list[i].sonarPath+"\">"+list[i].sonarPath+"</a></td>");
-	  	  $("#showBody").append("</tr>");
-	  }
-	  $("#show").show();
-	  
-	  $("#loading-anime").hide();
-	  
-}
+            dataType: "json",
+            success: function (res) {
+                if (res != null) {
+                    showResult(res);
+                    jsondata = res;
+                } else {
+                    res = '[{"studentID":"151250001","name":"李雷","score":null,"bugs":"0","vulnerabilities":"1","codeSmells":"12","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250001"},{"studentID":"151250002","name":"韩梅梅","score":null,"bugs":"0","vulnerabilities":"0","codeSmells":"40","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"}]';
+                    showResult(res);
+                    jsondata = res;
+                }
+            },
+            error: function () {
+                res = '[{"studentID":"151250001","name":"李雷","score":null,"bugs":"0","vulnerabilities":"1","codeSmells":"12","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250001"},{"studentID":"151250002","name":"韩梅梅","score":null,"bugs":"0","vulnerabilities":"0","codeSmells":"40","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"}]';
+                showResult(res);
+                jsondata = res;
+            }
+
+        })
+        ;
+    }
+
+
+    function showResult(res) {
+        var list = JSON.parse(res);
+
+        for (var i = 0; i < list.length; i++) {
+            var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
+            score = Math.sqrt(score) * 10;
+            score = 100 - score;
+            if (score < 0)
+                score = 0;
+            list[i].score = score;
+
+            $("#showBody").append("<tr>");
+            $("#showBody").append("<td>" + list[i].studentID + "</td>");
+            $("#showBody").append("<td>" + list[i].name + "</td>");
+            $("#showBody").append("<td>" + score + "</td>");
+            $("#showBody").append("<td>" + list[i].bugs + "</td>");
+            $("#showBody").append("<td>" + list[i].vulnerabilities + "</td>");
+            $("#showBody").append("<td>" + list[i].codeSmells + "</td>");
+            $("#showBody").append("<td>" + list[i].coverage + "</td>");
+            $("#showBody").append("<td>" + list[i].duplicated_lines_density + "</td>");
+            $("#showBody").append("<td><a href=\"" + list[i].sonarPath + "\">" + list[i].sonarPath + "</a></td>");
+            $("#showBody").append("</tr>");
+        }
+        $("#show").show();
+
+        $("#loading-anime").hide();
+
+    }
+
+    function downloadXlsx() {
+        var list = JSON.parse(res);
+        for (var i = 0; i < list.length; i++) {
+            var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
+            score = Math.sqrt(score) * 10;
+            score = 100 - score;
+            if (score < 0)
+                score = 0;
+            list[i].score = score;
+        }
+
+        var title = ['学号', '姓名', '分数', 'bug', '漏洞', '代码异味', '覆盖率', '重复率', 'sonar URL']
+        JSONToExcelConvertor(list, "report",title);
+
+    }
 </script>
 </body>
 </html>
