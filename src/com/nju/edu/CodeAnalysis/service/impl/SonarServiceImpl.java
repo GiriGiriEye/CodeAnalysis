@@ -38,10 +38,11 @@ public class SonarServiceImpl implements SonarService {
 	 * 假数据，标记
 	 */
 	@Override
-	public HashMap<String, String> getAnalysis(String studentID, String courseName, int number){
+	public HashMap<String, String> getAnalysis(String projectPath){
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("coverage", "0.0");
-		map.put("duplicated_lines_density", "0.0");
+		AnalysisBean bean = this.getAnalysisOfStudent(projectPath);
+		map.put("coverage", bean.getCoverage());
+		map.put("duplicated_lines_density", bean.getDuplicated_lines_density());
 		map.put("coverage", "0.0");
 		map.put("vulnerabilities", "0.0");
 		map.put("ncloc_language_distribution", "java=232;xml=122");

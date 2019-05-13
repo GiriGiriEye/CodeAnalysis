@@ -7,7 +7,7 @@ import com.nju.edu.CodeAnalysis.bean.AnalysisBean;
 public interface SonarService {
 	public void test();
 	
-	public HashMap<String, String> getAnalysis(String studentID, String courseName, int number);
+	public HashMap<String, String> getAnalysis(String projectPath);
 	
 	public void scan(LinkedList<String> projectPathList);
 	

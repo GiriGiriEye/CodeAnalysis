@@ -153,35 +153,27 @@
     function ask() {
         $.ajax({
             type: "GET",
-
             url: "../Show",
             async: true,
             cache: false,
-
             dataType: "json",
             success: function (res) {
-                if (res != null) {
-                    showResult(res);
-                    jsondata = res;
-                } else {
-                    res = '[{"studentID":"151250001","name":"李雷","score":null,"bugs":"0","vulnerabilities":"1","codeSmells":"12","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250001"},{"studentID":"151250002","name":"韩梅梅","score":null,"bugs":"0","vulnerabilities":"0","codeSmells":"40","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"}]';
-                    showResult(res);
-                    jsondata = res;
+                if(res == null){
+                    setTimeout(ask(),3000);
                 }
-            },
-            error: function () {
-                res = '[{"studentID":"151250001","name":"李雷","score":null,"bugs":"0","vulnerabilities":"1","codeSmells":"12","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250001"},{"studentID":"151250002","name":"韩梅梅","score":null,"bugs":"0","vulnerabilities":"0","codeSmells":"40","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"}]';
-                showResult(res);
-                jsondata = res;
+                else{
+                	showResult(res);
+                	jsondata = res;
+                	
+                }
             }
-
-        })
-        ;
+        });
     }
 
 
     function showResult(res) {
-        var list = JSON.parse(res);
+        var list = eval(res);
+        alert(list.toString());
 
         for (var i = 0; i < list.length; i++) {
             var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
@@ -210,7 +202,7 @@
     }
 
     function downloadXlsx() {
-        var list = JSON.parse(res);
+        var list = eval(jsondata);
         for (var i = 0; i < list.length; i++) {
             var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
             score = Math.sqrt(score) * 10;
