@@ -54,6 +54,11 @@
                 <div class="am-cf am-padding am-padding-bottom-0">
                     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
                         <small>Table</small>
+
+                        <form method="post" action="chart.jsp">
+                            <button class="am-btn am-btn-default" type="submit" onclick="setData()" name="btn1" id="btn1" value="" onsubmit="setData()">查看数据图表分析</button>
+                            <input type="hidden" name="data" id="data" value="">
+                        </form>
                     </div>
                 </div>
 
@@ -67,9 +72,11 @@
                         <span class="am-input-group-btn">
 
             <button class="am-btn am-btn-default" type="button">搜索</button>
-                                <button class="am-btn am-btn-default" type="button" onclick="downloadXlsx()">下载为excel文档</button>
+                                <button class="am-btn am-btn-default" type="button"
+                                        onclick="downloadXlsx()">下载为excel文档</button>
 
-          </span>
+
+                        </span>
 
                     </div>
                 </div>
@@ -163,6 +170,7 @@
                 if (res != null) {
                     showResult(res);
                     jsondata = res;
+                    setData();
                 } else {
                     res = '[{"studentID":"151250001","name":"李雷","score":null,"bugs":"0","vulnerabilities":"1","codeSmells":"12","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250001"},{"studentID":"151250002","name":"韩梅梅","score":null,"bugs":"0","vulnerabilities":"0","codeSmells":"40","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"}]';
                     showResult(res);
@@ -173,6 +181,7 @@
                 res = '[{"studentID":"151250001","name":"李雷","score":null,"bugs":"0","vulnerabilities":"1","codeSmells":"12","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250001"},{"studentID":"151250002","name":"韩梅梅","score":null,"bugs":"0","vulnerabilities":"0","codeSmells":"40","coverage":"0.0","duplicated_lines_density":"0.0","sonarPath":"http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"}]';
                 showResult(res);
                 jsondata = res;
+                setData();
             }
 
         })
@@ -221,8 +230,13 @@
         }
 
         var title = ['学号', '姓名', '分数', 'bug', '漏洞', '代码异味', '覆盖率', '重复率', 'sonar URL']
-        JSONToExcelConvertor(list, "report",title);
+        JSONToExcelConvertor(list, "report", title);
 
+    }
+
+    function setData() {
+        $("#data").attr('value',jsondata);
+        $("#data").val(jsondata);
     }
 </script>
 </body>
