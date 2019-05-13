@@ -160,13 +160,12 @@
     function ask() {
         $.ajax({
             type: "GET",
-
             url: "../Show",
             async: true,
             cache: false,
-
             dataType: "json",
             success: function (res) {
+
                 if (res != null) {
                     showResult(res);
                     jsondata = res;
@@ -182,15 +181,15 @@
                 showResult(res);
                 jsondata = res;
                 setData();
-            }
 
-        })
-        ;
+            }
+        });
     }
 
 
     function showResult(res) {
-        var list = JSON.parse(res);
+        var list = eval(res);
+        alert(list.toString());
 
         for (var i = 0; i < list.length; i++) {
             var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
@@ -219,7 +218,7 @@
     }
 
     function downloadXlsx() {
-        var list = JSON.parse(res);
+        var list = eval(jsondata);
         for (var i = 0; i < list.length; i++) {
             var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
             score = Math.sqrt(score) * 10;
