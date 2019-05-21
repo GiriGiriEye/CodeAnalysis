@@ -49,8 +49,7 @@ public class LoginServlet extends HttpServlet {
 		if(verified) {
 			HttpSession session = request.getSession(true);         
 			session.setAttribute("name", name);
-			System.out.println(session.getAttribute("name"));
-//			response.sendRedirect(request.getContextPath() + "/servlet/show");
+			response.sendRedirect("/CodeAnalysis/html/moodle_config.html");
 		}
 	}
 

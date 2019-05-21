@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nju.edu.CodeAnalysis.service.SonarService;
+
 /**
  * Servlet implementation class ScanServlet
  */
@@ -35,7 +37,11 @@ public class ScanServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String courseName = request.getParameter("courseName");
+		int number = Integer.parseInt(request.getParameter("number"));
+		
+		SonarService ss = new SonarServiceImpl();
+		ss.scan(projectPathList);
 	}
 
 }
