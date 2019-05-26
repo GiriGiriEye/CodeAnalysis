@@ -53,13 +53,14 @@
     }
     var myChart1 = echarts.init(document.getElementById('main1'));
     var data = <%out.print(data);%>;
+    data = null;
     if (data == null) {
         data = [{
             "studentID": "151250001",
             "name": "李雷",
             "score": null,
-            "bugs": "1",
-            "vulnerabilities": "1",
+            "bugs": "3",
+            "vulnerabilities": "6",
             "codeSmells": "12",
             "coverage": "0.0",
             "duplicated_lines_density": "2.0",
@@ -69,9 +70,9 @@
             "name": "韩梅梅",
             "score": null,
             "bugs": "2",
-            "vulnerabilities": "0",
+            "vulnerabilities": "4",
             "codeSmells": "20",
-            "coverage": "0.0",
+            "coverage": "6.0",
             "duplicated_lines_density": "8.0",
             "sonarPath": "http://140.143.157.215:9000/dashboard?id=operating_system_1_151250002"
         }];

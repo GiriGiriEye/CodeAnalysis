@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>分析作业</title>
-    <script src="js/jquery.min.js" ></script>
+    <script src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <script>
 
-        $(function(){
-            $("#submit-button").click((function(){
-                alert("已提交sonar进行分析");
+        $(function () {
+            $("#login-moodle-button").click((function () {
+                setTimeout(function () {
+                    $("#login-moodle").toggle();
+                    $("#select-homework").toggle();
+                },1500);
 
+
+
+            }));
+
+            $("#submit-button").click((function () {
+                alert("已提交sonar进行分析");
+                setTimeout(function () {
                     location.href = "html/ShowAnalysis.html";
+                },2000);
+
 
 
             }));
@@ -27,63 +39,95 @@
 
 <div class="col-lg-8">
     <h1 class="page-header">分析作业</h1>
-<!--
-    <div class="input-group">
-        <label for="basic-url">Your vanity URL</label>
-        <span class="input-group-addon" id="basic-addon1">@</span>
-        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+    <!--
+        <div class="input-group">
+            <label for="basic-url">Your vanity URL</label>
+            <span class="input-group-addon" id="basic-addon1">@</span>
+            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group">
+
+            <label for="basic-url">Your vanity URL</label>
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">@example.com</span>
+        </div>
+
+        <div class="input-group">
+
+            <label for="basic-url">Your vanity URL</label>
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-addon">.00</span>
+        </div>
+    -->
+
+    <div id="login-moodle">
+        <div class="input-group">
+            <label for="username">Moodle用户名</label>
+            <input type="text" class="form-control" placeholder="Username" id="username"
+                   aria-describedby="basic-addon3">
+        </div>
+
+        <div class="input-group">
+            <label for="password">Moodle密码</label>
+            <input type="password" class="form-control" placeholder="Password" id="password"
+                   aria-describedby="basic-addon3">
+        </div>
+
+        <!--    <div class="input-group">
+                <label for="lesson-id">课程名称</label>
+                <input type="text" class="form-control" placeholder="Password" id="lesson-id" aria-describedby="basic-addon3">
+            </div>
+
+
+            <div class="input-group">
+                <label for="homework-id">作业名称</label>
+                <input type="text" class="form-control" placeholder="Password" id="homework-id" aria-describedby="basic-addon3">
+            </div>-->
+
+        <div class="input-group">
+            <label for="basic-url">Moodle URL</label>
+            <select id="basic-url" class="form-control">
+                <option>http://106.14.196.100:8004/</option>
+                <option>http://219.219.120.72/</option>
+            </select>
+
+        </div>
+
+        <br/>
+        <div class="input-group">
+            <button type="button" class="btn btn-default" id="login-moodle-button">登陆moodle</button>
+        </div>
     </div>
 
-    <div class="input-group">
 
-        <label for="basic-url">Your vanity URL</label>
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-addon" id="basic-addon2">@example.com</span>
-    </div>
+    <div id="select-homework" style="display: none">
+        <div>
+            测试课程1
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="" value="option1" checked> - 测试作业1
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> - 作业2
+                </label>
+            </div>
+        </div>
+        <div>
+            测试课程2
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> - 测试作业1
+                </label>
+            </div>
 
-    <div class="input-group">
-
-        <label for="basic-url">Your vanity URL</label>
-        <span class="input-group-addon">$</span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-        <span class="input-group-addon">.00</span>
-    </div>
--->
-
-
-    <div class="input-group">
-        <label for="username">Moodle用户名</label>
-        <input type="text" class="form-control" placeholder="Username" id="username" aria-describedby="basic-addon3">
-    </div>
-
-    <div class="input-group">
-        <label for="password">Moodle密码</label>
-        <input type="password" class="form-control" placeholder="Password" id="password" aria-describedby="basic-addon3">
-    </div>
-
-    <div class="input-group">
-        <label for="lesson-id">课程名称</label>
-        <input type="text" class="form-control" placeholder="Password" id="lesson-id" aria-describedby="basic-addon3">
-    </div>
-
-
-    <div class="input-group">
-        <label for="homework-id">作业名称</label>
-        <input type="text" class="form-control" placeholder="Password" id="homework-id" aria-describedby="basic-addon3">
-    </div>
-
-    <div class="input-group">
-        <label for="basic-url">Moodle URL</label>
-        <select id="basic-url" class="form-control">
-            <option>http://106.14.196.100:8004/</option>
-            <option>http://219.219.120.72/</option>
-        </select>
-
-    </div>
-
-    <br/>
-    <div class="input-group">
-        <button type="button" class="btn btn-default" id="submit-button">分析</button>
+        </div>
+        <div class="input-group">
+            <button type="button" class="btn btn-default" id="submit-button">分析</button>
+        </div>
     </div>
 
 
