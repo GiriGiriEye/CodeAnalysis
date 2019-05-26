@@ -34,7 +34,9 @@ public class ShowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		LinkedList<AnalysisBean> ll = ss.getAllAnalysisOfOneAssignment("operating_system", 1);
+		String courseName = request.getParameter("courseName");
+		int number = Integer.parseInt(request.getParameter("number"));
+		LinkedList<AnalysisBean> ll = ss.getAllAnalysisOfOneAssignment(courseName, number);
 		String json = JSONUtil.JavaToJson(ll);
 		response.setContentType("application/json;charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
