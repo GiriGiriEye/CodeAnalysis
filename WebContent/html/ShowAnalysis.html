@@ -41,8 +41,12 @@
     </div>
     <h1 style="text-align:center;">代码分析中，请稍候……</h1>
 </div>
-<div class="am-cf admin-main">
 
+<div class="am-cf admin-main">
+<br>
+	<div>
+		<a href="moodle_config.html">返回分析页面</a>
+	</div>
     <!-- sidebar start -->
 
     <!-- sidebar end -->
@@ -68,10 +72,10 @@
 
                     <div class="am-input-group am-input-group-sm">
 
-                        <input type="text" class="am-form-field">
+                        <input type="text" class="am-form-field" name="search" id="search">
                         <span class="am-input-group-btn">
 
-            <button class="am-btn am-btn-default" type="button">搜索</button>
+            <button class="am-btn am-btn-default" type="button" onclick="mySearch()">搜索</button>
                                 <button class="am-btn am-btn-default" type="button"
                                         onclick="downloadXlsx()">下载为excel文档</button>
 
@@ -92,9 +96,9 @@
                                 <th class="table-type">姓名</th>
                                 <th class="table-type">得分</th>
                                 <th class="table-type">bug数</th>
-                                <th class="table-type">漏洞</th>
+                                <th class="table-type">认知复杂度</th>
                                 <th class="table-type">异味</th>
-                                <th class="table-type">覆盖率</th>
+                                <th class="table-type">Java代码行数</th>
                                 <th class="table-type">重复率</th>
                                 <th>详细信息地址</th>
                             </tr>
@@ -182,9 +186,9 @@
         var list = eval(res);
 
         for (var i = 0; i < list.length; i++) {
-            var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
+            var score = (list[i].bugs * 5 + list[i].codeSmells * 0.5 + list[i].duplicated_lines_density * 1 + 0.3 * list[i].vulnerabilities)* 100 / list[i].coverage;
             score = Math.sqrt(score) * 10;
-            score = 100 - score;
+            score = Math.floor(100 - score);
             if (score < 0)
                 score = 0;
             list[i].score = score;
@@ -210,15 +214,15 @@
     function downloadXlsx() {
         var list = eval(jsondata);
         for (var i = 0; i < list.length; i++) {
-            var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
-            score = Math.sqrt(score) * 10;
-            score = 100 - score;
+        	var score = (list[i].bugs * 5 + list[i].codeSmells * 0.5 + list[i].duplicated_lines_density * 1 + 0.3 * list[i].vulnerabilities)* 100 / list[i].coverage;
+        	score = Math.sqrt(score) * 10;
+            score = Math.floor(100 - score);
             if (score < 0)
                 score = 0;
             list[i].score = score;
         }
 
-        var title = ['学号', '姓名', '分数', 'bug', '漏洞', '代码异味', '覆盖率', '重复率', 'sonar URL']
+        var title = ['学号', '姓名', '分数', 'bug', '认知复杂度', '异味', 'Java代码行数', '重复率', 'sonar URL']
         JSONToExcelConvertor(list, "report", title);
 
     }
@@ -226,6 +230,57 @@
     function setData() {
         $("#data").attr('value',jsondata);
         $("#data").val(jsondata);
+    }
+
+    function mySearch(){
+		var searchData = $("#search").val();
+		
+		var list = eval(jsondata);
+		$("#showBody").html("");
+		
+	    for (var i = 0; i < list.length; i++) {
+	        if(searchData.search("1") != -1 && searchData.search("1") != null){
+				if(list[i].studentID == searchData){
+					var score = (list[i].bugs * 5 + list[i].codeSmells * 0.5 + list[i].duplicated_lines_density * 1 + 0.3 * list[i].vulnerabilities)* 100 / list[i].coverage;
+		        	score = Math.sqrt(score) * 10;
+		            score = Math.floor(100 - score);
+		            if (score < 0)
+		                score = 0;
+					$("#showBody").append("<tr>");
+		            $("#showBody").append("<td>" + list[i].studentID + "</td>");
+		            $("#showBody").append("<td>" + list[i].name + "</td>");
+		            $("#showBody").append("<td>" + score + "</td>");
+		            $("#showBody").append("<td>" + list[i].bugs + "</td>");
+		            $("#showBody").append("<td>" + list[i].vulnerabilities + "</td>");
+		            $("#showBody").append("<td>" + list[i].codeSmells + "</td>");
+		            $("#showBody").append("<td>" + list[i].coverage + "</td>");
+		            $("#showBody").append("<td>" + list[i].duplicated_lines_density + "</td>");
+		            $("#showBody").append("<td><a href=\"" + list[i].sonarPath + "\">" + list[i].sonarPath + "</a></td>");
+		            $("#showBody").append("</tr>");
+				}
+			}
+	        else if(searchData.search("1") == -1){
+		        
+				if(list[i].name == searchData){
+					var score = (list[i].bugs * 5 + list[i].codeSmells * 0.5 + list[i].duplicated_lines_density * 1 + 0.3 * list[i].vulnerabilities)* 100 / list[i].coverage;
+		        	score = Math.sqrt(score) * 10;
+		            score = Math.floor(100 - score);
+		            if (score < 0)
+		                score = 0;
+					$("#showBody").append("<tr>");
+		            $("#showBody").append("<td>" + list[i].studentID + "</td>");
+		            $("#showBody").append("<td>" + list[i].name + "</td>");
+		            $("#showBody").append("<td>" + score + "</td>");
+		            $("#showBody").append("<td>" + list[i].bugs + "</td>");
+		            $("#showBody").append("<td>" + list[i].vulnerabilities + "</td>");
+		            $("#showBody").append("<td>" + list[i].codeSmells + "</td>");
+		            $("#showBody").append("<td>" + list[i].coverage + "</td>");
+		            $("#showBody").append("<td>" + list[i].duplicated_lines_density + "</td>");
+		            $("#showBody").append("<td><a href=\"" + list[i].sonarPath + "\">" + list[i].sonarPath + "</a></td>");
+		            $("#showBody").append("</tr>");
+				}
+			}
+	    }
     }
 </script>
 </body>

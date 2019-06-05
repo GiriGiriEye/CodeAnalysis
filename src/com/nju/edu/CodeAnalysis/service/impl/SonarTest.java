@@ -11,7 +11,7 @@ import java.io.*;
 
 public class SonarTest {
 
-	static String address = "http://localhost:9000/api/measures/component?componentKey=CodeAnalysis&metricKeys=bugs,vulnerabilities,code_smells,duplicated_lines_density,ncloc_language_distribution,coverage";
+	static String address = "http://localhost:9000/api/measures/component?componentKey=student&metricKeys=bugs,cognitive_complexity,code_smells,duplicated_lines_density,ncloc";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -28,7 +28,10 @@ public class SonarTest {
 				document.append(line);
 			}
 			reader.close();
+			System.out.println(document.toString());
+			/*
 			JsonObject object =(JsonObject)parser.parse(document.toString()); 
+			System.out.println(document.toString());
 			JsonObject object1 = object.get("component").getAsJsonObject();
 			JsonArray array = object1.get("measures").getAsJsonArray();
 			for(int j = 0; j < array.size();j++) {
@@ -53,6 +56,8 @@ public class SonarTest {
 			}
 			System.out.println(ab.getCodeSmells());
 //			list.add(ab);
+ * 
+     		*/
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
 		}

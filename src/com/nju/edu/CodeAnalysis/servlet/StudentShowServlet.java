@@ -35,7 +35,7 @@ public class StudentShowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ss = new SonarServiceImpl();
-		String projectPath = "c:/Sonar/student";
+		String projectPath = "student";
 		String json = JSONUtil.JavaToJson(ss.getAnalysisOfStudent(projectPath));
 		System.out.println(json);
 		response.setContentType("application/json;charset=utf-8");

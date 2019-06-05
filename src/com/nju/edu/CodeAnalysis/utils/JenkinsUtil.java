@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class JenkinsUtil {
 	
-	private static String url = "http://140.143.157.215:8000/";
+	private static String url = "http://localhost:8000/";
 	
 	public void build(String jobName) {
 		
@@ -60,8 +60,6 @@ public class JenkinsUtil {
 			String name = "admin";
 			String pwd = "admin";
 			JenkinsServer server = new JenkinsServer(new URI(url), name, pwd);
-			
-//			System.out.println(server.getJob(jobName).getLastBuild().details().getResult());
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("token", "testtoken");
 			map.put("projectPath", projectPath);

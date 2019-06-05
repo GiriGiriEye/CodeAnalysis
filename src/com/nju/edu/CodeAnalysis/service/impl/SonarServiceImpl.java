@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class SonarServiceImpl implements SonarService {
 	
 	private static String forwardAddress = "http://localhost:9000/api/measures/component?componentKey=";
-	private static String backAddress = "&metricKeys=bugs,vulnerabilities,code_smells,duplicated_lines_density,ncloc_language_distribution,coverage";
+	private static String backAddress = "&metricKeys=bugs,cognitive_complexity,code_smells,duplicated_lines_density,ncloc";
 	
 	private AnalysisDao ad;
 	
@@ -59,16 +59,21 @@ public class SonarServiceImpl implements SonarService {
 	
 	@Override
 	public void scan(String projectPath) {
-		
 		JenkinsService js = new JenkinsServiceImpl();
 		js.singleBuild(projectPath);
+	}
+	
+	@Override 
+	public void studentGitScan(String gitPath) {
+		JenkinsService js = new JenkinsServiceImpl();
+		js.studentGitBuild(gitPath);
 	}
 	
 	public AnalysisBean getAnalysisOfStudent(String projectPath) {
 		AnalysisBean ab = new AnalysisBean();
 		JsonParser parser = new JsonParser();
 		try {
-			String address = forwardAddress + "student" + backAddress;
+			String address = forwardAddress + projectPath + backAddress;
 			URL url = new URL(address);
 			URLConnection conn = url.openConnection();
 			StringBuffer document = new StringBuffer();  
@@ -85,7 +90,7 @@ public class SonarServiceImpl implements SonarService {
 			for(int j = 0; j < array.size();j++) {
 				JsonObject object2 = array.get(j).getAsJsonObject();
 				switch(object2.get("metric").getAsString()) {
-				case "vulnerabilities":{
+				case "cognitive_complexity":{
 					ab.setVulnerabilities(object2.get("value").getAsString());break;
 				}
 				case "bugs":{
@@ -94,7 +99,7 @@ public class SonarServiceImpl implements SonarService {
 				case "code_smells":{
 					ab.setCodeSmells(object2.get("value").getAsString());break;
 				}
-				case "coverage":{
+				case "ncloc":{
 					ab.setCoverage(object2.get("value").getAsString());break;
 				}
 				case "duplicated_lines_density":{
@@ -103,7 +108,7 @@ public class SonarServiceImpl implements SonarService {
 				default: break;
 				}
 			}
-			ab.setSonarPath("http://140.143.157.215:9000/dashboard?id=student");
+			ab.setSonarPath("http://140.143.157.215:9000/dashboard?id=" + projectPath);
 			return ab;
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
@@ -146,7 +151,7 @@ public class SonarServiceImpl implements SonarService {
 				for(int j = 0; j < array.size();j++) {
 					JsonObject object2 = array.get(j).getAsJsonObject();
 					switch(object2.get("metric").getAsString()) {
-					case "vulnerabilities":{
+					case "cognitive_complexity":{
 						ab.setVulnerabilities(object2.get("value").getAsString());break;
 					}
 					case "bugs":{
@@ -155,7 +160,7 @@ public class SonarServiceImpl implements SonarService {
 					case "code_smells":{
 						ab.setCodeSmells(object2.get("value").getAsString());break;
 					}
-					case "coverage":{
+					case "ncloc":{
 						ab.setCoverage(object2.get("value").getAsString());break;
 					}
 					case "duplicated_lines_density":{

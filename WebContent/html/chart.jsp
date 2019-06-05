@@ -90,9 +90,9 @@
     for (var i = 0; i < data.length; i++) {
 
 
-        var score = list[i].bugs * 5 + list[i].vulnerabilities + list[i].codeSmells * 0.2;
+    	var score = (list[i].bugs * 5 + list[i].codeSmells * 0.5 + list[i].duplicated_lines_density * 1 + 0.3 * list[i].vulnerabilities)* 100 / list[i].coverage;
         score = Math.sqrt(score) * 10;
-        score = 100 - score;
+        score = Math.floor(100 - score);
         if (score < 0)
             score = 0;
         list[i].score = score;

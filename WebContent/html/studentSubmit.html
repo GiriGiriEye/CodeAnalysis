@@ -14,10 +14,7 @@
         $(function(){
             $("#submit-button").click((function(){
                 alert("已提交sonar进行分析");
-
                 location.href = "ShowStudentAnalysis.html";
-
-
             }));
         });
 
@@ -32,6 +29,9 @@
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 </header>
+<br>
+<br>
+<br>
 <div class="col-lg-3"></div>
 
 <div class="col-lg-8">
@@ -63,6 +63,13 @@
     <div class="input-group">
         <label for="file">上传代码</label>
         <input type="file" name="txt_file" id="txt_file" multiple id="file" class="file-loading" />
+    </div>
+    <div class="input-group">
+    	<label for="file">输入git仓库路径</label>
+    	<form method="post" action="/CodeAnalysis/StudentScan">
+        	<input type="text" name="gitPath" id="gitPath"/>
+        	<input type="submit" value="提交"/>
+        </form>
     </div>
     <br/>
     <br/>

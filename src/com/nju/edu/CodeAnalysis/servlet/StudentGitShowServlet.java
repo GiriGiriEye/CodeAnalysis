@@ -1,30 +1,30 @@
 package com.nju.edu.CodeAnalysis.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.*;
-import com.nju.edu.CodeAnalysis.bean.*;
-import com.nju.edu.CodeAnalysis.utils.*;
 import com.nju.edu.CodeAnalysis.service.*;
 import com.nju.edu.CodeAnalysis.service.impl.*;
-import java.io.*;
+import com.nju.edu.CodeAnalysis.utils.JSONUtil;
+
 /**
- * Servlet implementation class TestServlet1
+ * Servlet implementation class StudentGitShowServlet
  */
-@WebServlet("/Show")
-public class ShowServlet extends HttpServlet {
+@WebServlet("/StudentGitShow")
+public class StudentGitShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private SonarService ss = new SonarServiceImpl();
+       
+	private SonarService ss;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowServlet() {
+    public StudentGitShowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +34,10 @@ public class ShowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String courseName = "operating_system";
-		int number = 1;
-		LinkedList<AnalysisBean> ll = ss.getAllAnalysisOfOneAssignment(courseName, number);
-		String json = JSONUtil.JavaToJson(ll);
+		ss = new SonarServiceImpl();
+		String projectPath = "student_git";
+		String json = JSONUtil.JavaToJson(ss.getAnalysisOfStudent(projectPath));
+		System.out.println(json);
 		response.setContentType("application/json;charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();

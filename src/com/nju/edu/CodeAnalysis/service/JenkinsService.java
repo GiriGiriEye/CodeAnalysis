@@ -8,4 +8,6 @@ public interface JenkinsService {
 	
 	public void multipleBuild(LinkedList<String> projectPathList);
 	
+	public void studentGitBuild(String gitPath);
+	
 }

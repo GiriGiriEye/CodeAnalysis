@@ -22,7 +22,7 @@ public class JenkinsServiceImpl implements JenkinsService {
 	@Override
 	public void singleBuild(String projectPath) {
 		// TODO Auto-generated method stub
-		String jobName = "studentbuild";
+		String jobName = "student";
 		LinkedList<String> list = new LinkedList<String>();
 		list.add(projectPath);
 		JenkinsThread jthread = new JenkinsThread(jobName, list);
@@ -50,6 +50,15 @@ public class JenkinsServiceImpl implements JenkinsService {
 			jthread[i] = new JenkinsThread(jobName + String.valueOf(i+1), listOflist.get(i)); 
 			jthread[i].run();
 		}
+	}
+	
+	@Override
+	public void studentGitBuild(String gitPath) {
+		String jobName = "studentGit";
+		LinkedList<String> list = new LinkedList<String>();
+		list.add(gitPath);
+		JenkinsThread jthread = new JenkinsThread(jobName, list);
+		jthread.run();
 	}
 
 }

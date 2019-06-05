@@ -41,8 +41,14 @@ public class StudentScanServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ss = new SonarServiceImpl();
-		String projectPath = (String)request.getParameter("proejectPath");
-		ss.scan(projectPath);
+		String projectPath = (String)request.getParameter("projectPath");
+		String gitPath = (String)request.getParameter("gitPath");
+		if(projectPath != null && !projectPath.equals(""))
+			ss.scan(projectPath);
+		else if(gitPath != null && !gitPath.equals("")) {
+			response.sendRedirect("/CodeAnalysis/html/ShowStudentGitAnalysis.html");
+			ss.studentGitScan(gitPath);
+		}
 	}
 
 }

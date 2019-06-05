@@ -40,8 +40,8 @@ public class ScanServlet extends HttpServlet {
 		String courseName = request.getParameter("courseName");
 		int number = Integer.parseInt(request.getParameter("number"));
 		
-		SonarService ss = new SonarServiceImpl();
-		ss.scan(projectPathList);
+//		SonarService ss = new SonarServiceImpl();
+//		ss.scan(projectPathList);
 	}
 
 }

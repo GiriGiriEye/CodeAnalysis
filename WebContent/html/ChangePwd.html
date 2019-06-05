@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>修改密码</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="../AmazeUI/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="../AmazeUI/assets/css/admin.css">
+    <link rel="stylesheet" href="../css/loading-anime.css">
+    <script lang="javascript" src="../js/jte.js"></script>
+</head>
+<body>
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>Code Analysis System</strong>
+        <small>代码静态检查系统</small>
+    </div>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+            data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span></button>
+</header>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <h3>修改密码</h3>
+    <hr>
+    <br>
+
+    <form method="post" class="am-form" action="/CodeAnalysis/PWDChange">
+      <label for="password">原密码:</label>
+      <input type="password" value="">
+      <br>
+      <label for="password">新密码:</label>
+      <input type="password" value="">
+      <label for="password">确认新密码:</label>
+      <input type="password" name="pwd" id="pwd" value="">
+      <br>
+      <div class="am-cf">
+        <input type="submit" name="" value="修 改" class="am-btn am-btn-primary am-btn-sm am-fl">
+      </div>
+      
+    </form>
+    
+    <hr>
+    <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -16,4 +16,6 @@ public interface SonarService {
 	public LinkedList<AnalysisBean> getAllAnalysisOfOneAssignment(String courseName, int number);
 	
 	public AnalysisBean getAnalysisOfStudent(String projectPath);
+	
+	public void studentGitScan(String gitPath);
 }
